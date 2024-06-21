@@ -1,7 +1,7 @@
 .profile {
     display: flex;
     align-items: center;
-    padding: 40px;
+    padding: 40px 0px;
 }
 
 .profile__info {
@@ -11,12 +11,14 @@
         "description description";
     grid-template-columns: minmax(auto, 373px) auto;
 }
+
 .profile__edit-button {
     background: transparent url(../images/edit.svg) center no-repeat;
     height: 24px;
     width: 24px;
     grid-area: button;
 }
+
 .profile__add-button {
     background: transparent url(../images/add.svg) center no-repeat;
     width: 150px;
@@ -31,6 +33,7 @@
     grid-area: title;
     margin: 0;
 }
+
 .profile__description {
     font-size: 18px;
     line-height: 22px;
@@ -38,6 +41,7 @@
     grid-area: description;
     margin: 0;
 }
+
 .profile__image {
     height: 120px;
     width: 120px;
@@ -45,6 +49,42 @@
     object-fit: cover;
     background-position: center;
     margin-right: 24px;
+}
+
+@media screen and (min-width: 590px) and (max-width: 950px) {
+    .profile {
+      column-gap: 20px;
+      justify-content: space-around;
+    }
+  
+    .profile__info {
+      gap: 12px 14px;
+    }
+  
+    .profile__image {
+      margin: 0;
+    }
+  
+    .profile__header {
+      font-size: 26px;
+      line-height: 32px;
+      white-space: nowrap;
+    }
+  
+    .profile__description {
+      font-size: 16px;
+      line-height: 19px;
+    }
+  
+    .profile__edit-button {
+      height: 20px;
+      width: 20px;
+    }
+  }
+@media screen and (min-width: 590px) and (max-width: 720px) {
+    .profile__add-button {
+      margin: 0;
+    }
 }
 @media screen and (max-width: 589px) {
     .profile {
@@ -86,41 +126,4 @@
       margin: 36px 19px;
       width: 282px;
     }
-  }
-  
-  @media screen and (min-width: 590px) and (max-width: 720px) {
-    .profile__add-button {
-      margin: 0;
-    }
-  }
-  
-  @media screen and (min-width: 590px) and (max-width: 950px) {
-    .profile {
-      column-gap: 20px;
-      justify-content: space-around;
-    }
-  
-    .profile__info {
-      gap: 12px 14px;
-    }
-  
-    .profile__image {
-      margin: 0;
-    }
-  
-    .profile__header {
-      font-size: 26px;
-      line-height: 32px;
-      white-space: nowrap;
-    }
-  
-    .profile__description {
-      font-size: 16px;
-      line-height: 19px;
-    }
-  
-    .profile__edit-button {
-      height: 20px;
-      width: 20px;
-    }
-  }
+}
