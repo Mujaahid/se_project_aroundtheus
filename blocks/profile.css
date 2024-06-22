@@ -51,6 +51,9 @@
     font-weight: 400;
     grid-area: description;
     margin: 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .profile__image {
