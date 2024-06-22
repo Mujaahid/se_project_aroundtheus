@@ -39,8 +39,12 @@
 
 .card__like-button {
     background: transparent url(../images/heart.svg) center no-repeat;
-    width: 21px;
+    min-width: 21px;
     height: 18px;
+}
+.card__like-button:hover {
+    opacity: 50%;
+    cursor: pointer;
 }
 
 .card__title {

@@ -1,7 +1,10 @@
 .footer__description {
-    color: #545454;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 21px;
-    margin: 60px 0px 30px 0px;
+    margin: 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  color: #545454;
+  padding-top: 67px;
+  padding-bottom: 60px;
 }
