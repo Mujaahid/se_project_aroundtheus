@@ -1,6 +1,10 @@
 .header {
-    margin: 45px auto 0px auto;
-    padding-bottom: 40px;
     max-width: 880px;
-    border-bottom: 1px #545454 solid;
+    margin: 45px 0 40px;
+    border-bottom: 1px solid rgba(84, 84, 84, 0.7);
 }
+
+.header__logo {
+    align-self: start;
+    padding-bottom: 41px;
+  }

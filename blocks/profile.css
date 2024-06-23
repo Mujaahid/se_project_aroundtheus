@@ -1,15 +1,20 @@
 .profile {
     display: flex;
     align-items: center;
-    padding: 40px 0px 40px 0px;
+    justify-content: center;
+    padding-bottom: 47px;
 }
 
 .profile__info {
-    display: grid;
-    grid-template-areas: 
-        "title button"
-        "description description";
-    grid-template-columns: minmax(auto, 373px) auto;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.profile__info-title {
+    display: flex;
+    align-items: center;
 }
 
 .profile__edit-button {
@@ -41,20 +46,19 @@
 }
 
 .profile__title {
-    grid-area: title;
-
     max-width: 373px;
     font-weight: 500;
     font-size: 42px;
     line-height: 48px;
     margin: 0;
     text-overflow: ellipsis;
-    white-space: nowrap;
     overflow: hidden;
+    white-space: nowrap;
 }
 
 .profile__description {
     font-size: 18px;
+    padding-top: 16px;
     line-height: 22px;
     font-weight: 400;
     grid-area: description;
@@ -74,12 +78,14 @@
 }
 
 @media screen and (max-width: 900px) {
+    .profile {
+      margin: 0 auto;
+      background: pink;
+    }
+
     .profile__title {
         max-width: 230px;
         text-align: center;
-    }
-    .profile {
-      margin: 0 auto;
     }
 
     .profile__description {
@@ -95,13 +101,32 @@
       width: 24px;
       height: 24px;
     }
+
+
+    .page__content {
+        max-width: 600px;
+    }
 }
 @media screen and (max-width: 595px) {
-    .profile {
-      flex-direction: column;
-      padding: 0;
-      margin: 42px 19px 36px 19px;
+
+    .header__logo {
+        width: 126px;
+        padding: 28px 167px 32px 27px;
     }
+    
+    .header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+    }
+
+    .profile {
+        flex-direction: column;
+        padding: 0;
+        margin: 42px 19px 36px 19px;
+    }
+
     .profile__description {
       font-size: 14px;
       line-height: 17px;
@@ -112,15 +137,12 @@
       text-overflow: ellipsis;
       white-space: nowrap;
     }
+
     .profile__title {
       font-size: 22px;
       line-height: 27px;
-      text-align: center;
       padding: 0;
       max-width: 196px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
     }
   
     .profile__info {
@@ -128,6 +150,10 @@
       text-align: center;
     }
 
+
+    .profile__info-title {
+        padding: 26px 34px 14px 62px;
+    }
   
     .profile__image {
       margin-right: 0;
