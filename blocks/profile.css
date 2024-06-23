@@ -36,6 +36,7 @@
     height: 50px;
     margin-left: auto;
     border: 2px solid #fff;
+    border-radius: 2px;
     padding: 0;
     flex-wrap: wrap;
 }
@@ -80,7 +81,6 @@
 @media screen and (max-width: 900px) {
     .profile {
       margin: 0 auto;
-      background: pink;
     }
 
     .profile__title {
@@ -130,9 +130,6 @@
       margin-bottom: 36px;
       max-width: 196px;
       padding: 0;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
     }
 
     .profile__title {
