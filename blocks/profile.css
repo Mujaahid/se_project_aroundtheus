@@ -90,9 +90,6 @@
 
     .profile__description {
       text-align: left;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
       max-width: 230px;
     }
   
