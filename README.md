@@ -23,3 +23,4 @@ This project was developed using HTML and CSS, based on a Figma design brief. Th
 [Screenshot of desktop resolution](./images/DesktopScreenshot.png)
 
 [The link to GitHub Pages] (https://mujaahid.github.io/se_project_aroundtheus/)
+[The link to video recording] (https://drive.google.com/file/d/13-RBXdRr52RSeN4Wf1XM1dbwOrkgQBz4/view?usp=sharing&t=22)
