@@ -24,3 +24,22 @@ let initialCards = [
         link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
     },
 ]
+
+// pop up function
+let popUp = document.querySelector('.popup');
+
+let editButton = document.querySelector('.profile__edit-button');
+let closeButton = document.querySelector('.popup__close-button')
+
+editButton.addEventListener('click', openPopup);
+closeButton.addEventListener('click', closePopup);
+
+function openPopup() {
+    popUp.style.display = 'flex';
+    console.log("it works")
+}
+
+function closePopup() {
+    popUp.style.display = 'none';
+    console.log("it works")
+}
