@@ -36,10 +36,40 @@ closeButton.addEventListener('click', closePopup);
 
 function openPopup() {
     popUp.style.display = 'flex';
-    console.log("it works")
 }
 
 function closePopup() {
     popUp.style.display = 'none';
-    console.log("it works")
 }
+
+
+
+// find the form in the DOM
+let profileFormElement = document.querySelector('.popup__form');
+
+// find the form fields in the DOM
+let nameInput = document.getElementById('name-input');
+let jobInput = document.getElementById('description-input');
+
+// find the profile elements in the DOM
+let profileName = document.querySelector('.profile__title');
+let profileJob = document.querySelector('.profile__description');
+
+
+let formElement = document.querySelector('.popup__submit')
+
+function handleProfileFormSubmit(evt) {
+  evt.preventDefault(); 
+ 
+  let nameValue = nameInput.value;
+  let breedValue = breedInput.value;
+
+  // Update the textContent of the profile elements
+  profileName.textContent = nameValue;
+  profileBreed.textContent = breedValue;
+
+}
+
+// connect the handler to the form:
+// it will watch the submit event
+formElement.addEventListener('submit', handleProfileFormSubmit);
