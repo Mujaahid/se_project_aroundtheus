@@ -68,16 +68,18 @@ const popUp = document.querySelector('.popup');
 const editButton = document.querySelector('.profile__edit-button');
 const closeButton = document.querySelector('.popup__close-button')
 
-editButton.addEventListener('click', openPopup);
-closeButton.addEventListener('click', closePopup);
 
+
+// open and close edit modal function
 function openPopup() {
-    popUp.classList.add('openPopup')
+    popUp.classList.add('popup_opened')
 }
 
 function closePopup() {
-    popUp.classList.remove('openPopup')
+    popUp.classList.remove('popup_opened')
 }
+
+
 
 
 // find the form in the DOM
@@ -98,15 +100,18 @@ function handleProfileFormSubmit(evt) {
   evt.preventDefault(); 
  
   const nameValue = nameInput.value;
-  const breedValue = breedInput.value;
+  const descriptionValue = jobInput.value;
 
   // Update the textContent of the profile elements
   profileName.textContent = nameValue;
-  profileBreed.textContent = breedValue;
-  console.log( profileName.textContent)
-
+  profileJob.textContent = descriptionValue;
 }
 
 // connect the handler to the form:
 // it will watch the submit event
-formElement.addEventListener('submit', profileFormElement);
+profileFormElement.addEventListener('submit', handleProfileFormSubmit);
+
+
+editButton.addEventListener('click', openPopup);
+closeButton.addEventListener('click', closePopup);
+formElement.addEventListener('click', closePopup);

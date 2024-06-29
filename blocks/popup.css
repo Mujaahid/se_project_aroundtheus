@@ -13,7 +13,7 @@
     visibility: hidden;
 }
 
-.openPopup {
+.popup_opened {
     visibility: visible;
 }
 
