@@ -104,8 +104,6 @@ function closePopup() {
     popUp.classList.remove('popup_opened')
 }
 function fillProfileForm() {
-
-    // profileName.textContent = nameInput.placeholder;
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
     openPopup();
