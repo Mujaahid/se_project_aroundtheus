@@ -62,17 +62,7 @@ const popUp = document.querySelector('.popup');
 
 const editButton = document.querySelector('.profile__edit-button');
 const closeButton = document.querySelector('.popup__close-button')
-
-
-
-// open and close edit modal function
-function openPopup() {
-    popUp.classList.add('popup_opened')
-}
-
-function closePopup() {
-    popUp.classList.remove('popup_opened')
-}
+  
 
 
 // find the form in the DOM
@@ -105,6 +95,22 @@ function handleProfileFormSubmit(evt) {
 profileFormElement.addEventListener('submit', handleProfileFormSubmit);
 
 
-editButton.addEventListener('click', openPopup);
+// open and close edit modal function
+function openPopup() {
+    popUp.classList.add('popup_opened')
+}
+
+function closePopup() {
+    popUp.classList.remove('popup_opened')
+}
+function fillProfileForm() {
+
+    // profileName.textContent = nameInput.placeholder;
+    nameInput.value = profileName.textContent;
+    jobInput.value = profileJob.textContent;
+    openPopup();
+}
+
+editButton.addEventListener('click', fillProfileForm);
 closeButton.addEventListener('click', closePopup);
 formElement.addEventListener('click', closePopup);
