@@ -57,11 +57,6 @@ initialCards.forEach(cardData => {
 });
 
 
-
-
-
-
-
 // pop up function
 const popUp = document.querySelector('.popup');
 
@@ -78,8 +73,6 @@ function openPopup() {
 function closePopup() {
     popUp.classList.remove('popup_opened')
 }
-
-
 
 
 // find the form in the DOM
