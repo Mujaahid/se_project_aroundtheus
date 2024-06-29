@@ -9,7 +9,12 @@
     bottom: 0;
     right: 0;
     z-index: 1;
-    display: none;
+    display: flex;
+    visibility: hidden;
+}
+
+.openPopup {
+    visibility: visible;
 }
 
 .popup__content {

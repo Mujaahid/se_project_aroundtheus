@@ -1,4 +1,4 @@
-let initialCards = [
+const initialCards = [
     {
         name: "Yosemite Valley",
         link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
@@ -25,51 +25,88 @@ let initialCards = [
     },
 ]
 
-// pop up function
-let popUp = document.querySelector('.popup');
 
-let editButton = document.querySelector('.profile__edit-button');
-let closeButton = document.querySelector('.popup__close-button')
+// generate card with js
+
+// Select the parent element where the cards will be appended
+const cardList = document.getElementById('cardList');
+
+// Select the template element
+const cardTemplate = document.getElementById('card-template').content;
+
+// Function to create a card element from a template
+function createCard(cardData) {
+  // Clone the template content
+  const cardElement = cardTemplate.cloneNode(true);
+
+  // Select and populate the cloned elements
+  const cardImage = cardElement.querySelector('.card__image');
+  cardImage.src = cardData.link;
+  cardImage.alt = cardData.name;
+
+  const cardTitle = cardElement.querySelector('.card__title');
+  cardTitle.textContent = cardData.name;
+
+  return cardElement;
+}
+
+// Iterate over the initialCards array and append each card to the list
+initialCards.forEach(cardData => {
+  const card = createCard(cardData);
+  cardList.appendChild(card);
+});
+
+
+
+
+
+
+
+// pop up function
+const popUp = document.querySelector('.popup');
+
+const editButton = document.querySelector('.profile__edit-button');
+const closeButton = document.querySelector('.popup__close-button')
 
 editButton.addEventListener('click', openPopup);
 closeButton.addEventListener('click', closePopup);
 
 function openPopup() {
-    popUp.style.display = 'flex';
+    popUp.classList.add('openPopup')
 }
 
 function closePopup() {
-    popUp.style.display = 'none';
+    popUp.classList.remove('openPopup')
 }
 
 
-
 // find the form in the DOM
-let profileFormElement = document.querySelector('.popup__form');
+const profileFormElement = document.querySelector('.popup__form');
 
 // find the form fields in the DOM
-let nameInput = document.getElementById('name-input');
-let jobInput = document.getElementById('description-input');
+const nameInput = document.getElementById('name-input');
+const jobInput = document.getElementById('description-input');
 
 // find the profile elements in the DOM
-let profileName = document.querySelector('.profile__title');
-let profileJob = document.querySelector('.profile__description');
+const profileName = document.querySelector('.profile__title');
+const profileJob = document.querySelector('.profile__description');
 
 
-let formElement = document.querySelector('.popup__submit')
+const formElement = document.querySelector('.popup__submit')
 
 function handleProfileFormSubmit(evt) {
   evt.preventDefault(); 
  
-  let nameValue = nameInput.value;
-  let breedValue = breedInput.value;
+  const nameValue = nameInput.value;
+  const breedValue = breedInput.value;
 
   // Update the textContent of the profile elements
   profileName.textContent = nameValue;
   profileBreed.textContent = breedValue;
+  console.log( profileName.textContent)
 
 }
 
 // connect the handler to the form:
 // it will watch the submit event
-formElement.addEventListener('submit', handleProfileFormSubmit);
+formElement.addEventListener('submit', profileFormElement);
