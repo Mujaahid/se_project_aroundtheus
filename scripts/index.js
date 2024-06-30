@@ -103,12 +103,16 @@ function openPopup() {
 function closePopup() {
     popUp.classList.remove('popup_opened')
 }
-function fillProfileForm() {
-    nameInput.value = profileName.textContent;
-    jobInput.value = profileJob.textContent;
+function fillProfileForm() { 
+    nameInput.value = profileName.textContent; 
+    jobInput.value = profileJob.textContent; 
+}
+  
+function openProfilePopup() { 
+    fillProfileForm();
     openPopup();
 }
 
-editButton.addEventListener('click', fillProfileForm);
+editButton.addEventListener('click', openProfilePopup);
 closeButton.addEventListener('click', closePopup);
 formElement.addEventListener('click', closePopup);
