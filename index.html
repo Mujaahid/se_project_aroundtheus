@@ -39,6 +39,44 @@
                 </form>
             </div>
         </div>
+
+        <div class="add__popup">
+            <div class="add__popup--content">
+                <h3 class="add__popup--title">New Place</h3>
+                <button class="add__popup--close-button"></button>
+
+                <form class="add__popup--form">
+                    <div class="add__popup--input-container">
+                        <input 
+                        type="text" 
+                        class="add__popup--input"
+                        id="add__popup--name"
+                        name="name"
+                        placeholder="Title">
+                    </div>
+                    <div class="popup__input-container">
+                        <input 
+                        type="text" 
+                        class="add__popup--input"
+                        id="add__popup--url"
+                        name="name"
+                        placeholder="Image URL">
+                    </div>
+                    <button class="add__popup-submit" type="submit">Save</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="picture__popup">
+            <div class="picture__popup-container">
+                <button class="picture__popup--close"></button>
+                <img class="picture__popup-image" src="https://i.pinimg.com/originals/2c/ec/22/2cec22fe23d1f1bd837028a2d22a8ac5.gif" alt="">
+                <div class="picture__popup-title">name</div>
+            </div>
+        </div>
+
+
+
         <main class="content">
             <section class="profile page__section">
                 <img class="profile__image" src="./images/jacques-cousteau.jpg" alt="avatar">
@@ -55,6 +93,7 @@
                 <ul id="cardList" class="cards__list">
                     <template id="card-template">
                         <li class="card">
+                                <img class="delete__icon" src="./images/Trash.svg" alt="">
                                 <img class="card__image" src="" alt="">
                             <div class="card__description">
                                 <h2 class="card__title"></h2>
