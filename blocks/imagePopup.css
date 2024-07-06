@@ -1,4 +1,4 @@
-.picture__popup {
+/* .picture__popup {
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -13,7 +13,7 @@
     visibility: hidden;
     opacity: 0;
     transition: visibility 0s, opacity 250ms linear;
-}
+} */
 .popup_opened {
     visibility: visible;
     opacity: 1;

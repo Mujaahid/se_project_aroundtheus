@@ -8,7 +8,7 @@ const initialCards = [
     { name: "Lago di Braies", link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg" },
 ];
 
-// add card modual
+// Handles opening and closing the add card popup
 const cardList = document.getElementById('cardList');
 const cardTemplate = document.getElementById('card-template').content;
 const addPopup = document.querySelector('.add__popup');
@@ -23,7 +23,7 @@ function closeAddPopup() {
 addCardButton.addEventListener('click', openAddPopup);
 closeAddCardButton.addEventListener('click', closeAddPopup);
 
-// 
+// Handles creating new cards from initial data and user input, and appending them to the card list
 const submitAddCard = document.querySelector('.add__popup-submit');
 const cardsList = document.querySelector('.cards__list');
 const addCardTitleInput = document.getElementById('add__popup--name');
