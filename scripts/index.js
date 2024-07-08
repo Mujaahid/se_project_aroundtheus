@@ -56,7 +56,7 @@ function createCard(cardData) {
     cardTitle.textContent = cardData.name;
 
     cardImage.addEventListener('click', () => {
-        popupImageWithImage(cardData.name, cardData.link);
+        showPopupImage(cardData.name, cardData.link);
     });
 
     likeButton.addEventListener('click', () => {
@@ -64,12 +64,10 @@ function createCard(cardData) {
     });
 
     // delete function and like function
-    cardsList.addEventListener('click', (e) => {
-        if (e.target.classList.contains('delete__icon')) {
-            const card = e.target.closest('.card');
-            if (card) {
-                card.remove();
-            }
+    deleteButton.addEventListener('click', (e) => {
+        const card = e.target.closest('.card');
+        if (card) {
+            card.remove();
         }
     });
 
@@ -94,10 +92,11 @@ submitAddCard.addEventListener('click', (e) => {
     }
 });
 
-function popupImageWithImage(title, imageUrl) {
+function showPopupImage(title, imageUrl) {
     popupImage.src = imageUrl;
+    popupImage.alt = title; 
     popupTitle.textContent = title;
-    popup.classList.add('popup_opened');
+    openPopup(popup);
 }
 
 function handleProfileFormSubmit(evt) {

@@ -101,6 +101,10 @@
       height: 322px;
       padding: 0 22px;
     }
+
+    .popup__title {
+        font-size: 18px;
+    }
   
     .popup__form {
       max-width: 282px;
