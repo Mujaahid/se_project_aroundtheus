@@ -8,7 +8,7 @@ const initialCards = [
     { name: "Lago di Braies", link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg" },
 ];
 const cardTemplate = document.getElementById('card-template').content;
-const addPopup = document.querySelector('.add__popup');
+const addPopup = document.querySelector('.add-popup');
 const addCardButton = document.querySelector('.profile__add-button');
 const submitAddCard = document.querySelector('.add__popup-submit');
 const cardsList = document.querySelector('.cards__list');
@@ -21,18 +21,21 @@ const nameInput = document.getElementById('name-input');
 const jobInput = document.getElementById('description-input');
 const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__description');
-const popup = document.querySelector('.picture__popup');
+const picturePopup = document.querySelector('.picture__popup');
 const popupImage = document.querySelector('.picture__popup-image');
 const popupTitle = document.querySelector('.picture__popup-title');
-const card = document.querySelector('.card');
 const closeButtons = document.querySelectorAll('.popup__close-button');
 
 function openPopup(popup) {
-    popup.classList.add('popup_opened');
+    if (popup) {
+        popup.classList.add('popup_opened');
+    }
 }
 
 function closePopup(popup) {
-    popup.classList.remove('popup_opened');
+    if (popup) {
+        popup.classList.remove('popup_opened');
+    } 
 }
 
 addCardButton.addEventListener('click', () => openPopup(addPopup));
@@ -63,7 +66,6 @@ function createCard(cardData) {
         likeButton.classList.toggle('card__like-button_active');
     });
 
-    // delete function and like function
     deleteButton.addEventListener('click', (e) => {
         const card = e.target.closest('.card');
         if (card) {
@@ -96,7 +98,7 @@ function showPopupImage(title, imageUrl) {
     popupImage.src = imageUrl;
     popupImage.alt = title; 
     popupTitle.textContent = title;
-    openPopup(popup);
+    openPopup(picturePopup);
 }
 
 function handleProfileFormSubmit(evt) {
@@ -117,4 +119,5 @@ function openProfilePopup() {
     fillProfileForm();
     openPopup(profilePopup);
 }
+
 editButton.addEventListener('click', openProfilePopup);
