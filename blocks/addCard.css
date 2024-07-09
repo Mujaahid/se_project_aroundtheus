@@ -71,6 +71,10 @@
     .add__popup--form {
       max-width: 282px;
     }
+
+    .add__popup--title {
+        font-size: 18px;
+    }
   
     .add__popup-submit {
       max-width: 282px;
