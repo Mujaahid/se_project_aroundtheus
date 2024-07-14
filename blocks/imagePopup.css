@@ -3,13 +3,19 @@
     opacity: 1;
 }
 
-.picture__popup-container {
+.popup__content-image-preview {
     position: relative;
 }
 
-.picture__popup-image {
+.popup__image {
     max-height: 80vh;
     max-width: 70vw;
+}
+
+.popup__content-image {
+    background: none;
+    width: fit-content;
+    padding: 0;
 }
 
 .picture__popup-title {
@@ -19,7 +25,7 @@
     line-height: 14px;
 }
 @media screen and (max-width: 320px) {
-    .picture__popup-image {
+    .popup__image {
         max-width: 80vw;
     }
 }

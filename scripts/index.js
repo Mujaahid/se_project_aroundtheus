@@ -7,23 +7,24 @@ const initialCards = [
     { name: "Vanoise National Park", link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg" },
     { name: "Lago di Braies", link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg" },
 ];
+
 const cardTemplate = document.getElementById('card-template').content;
-const addPopup = document.querySelector('.add-popup');
+const addPopup = document.getElementById('add-popup');
 const addCardButton = document.querySelector('.profile__add-button');
-const submitAddCard = document.querySelector('.add__popup-submit');
-const cardsList = document.querySelector('.cards__list');
-const addCardTitleInput = document.getElementById('add__popup--name');
-const addCardImageInput = document.getElementById('add__popup--url');
-const profilePopup = document.querySelector('.popup');
+const submitAddCardForm = document.getElementById('add-form');
+const cardsList = document.getElementById('cardList');
+const addCardTitleInput = document.getElementById('add_title-input');
+const addCardImageInput = document.getElementById('add_url-input');
+const profilePopup = document.getElementById('edit-popup');
 const editButton = document.querySelector('.profile__edit-button');
-const profileFormElement = document.querySelector('.popup__form');
+const profileFormElement = document.getElementById('edit-profile-form');
 const nameInput = document.getElementById('name-input');
 const jobInput = document.getElementById('description-input');
 const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__description');
-const picturePopup = document.querySelector('.picture-popup');
-const popupImage = document.querySelector('.picture__popup-image');
-const popupTitle = document.querySelector('.picture__popup-title');
+const picturePopup = document.getElementById('image_preview');
+const popupImage = document.querySelector('.popup__image');
+const popupTitle = document.querySelector('.popup__image-title');
 const closeButtons = document.querySelectorAll('.popup__close-button');
 
 function openPopup(popup) {
@@ -81,7 +82,7 @@ initialCards.forEach(cardData => {
     cardsList.appendChild(card);
 });
 
-submitAddCard.addEventListener('click', (e) => {
+submitAddCardForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const title = addCardTitleInput.value;
     const imageUrl = addCardImageInput.value;

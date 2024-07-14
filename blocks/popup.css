@@ -118,7 +118,7 @@
         background-image: url(../images/Small\ Close\ Icon.svg);
         width: 26px;
         height: 26px;
-        right: 0;
+        right: -30px;
     }
 
 }

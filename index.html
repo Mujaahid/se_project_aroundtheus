@@ -14,12 +14,11 @@
             <img class="header__logo" src="./images/logo.svg" alt="Around the U.S. logo">
         </header>
 
-        
-        <div class="popup">
+        <div class="popup" id="edit-popup">
             <div class="popup__content">
                 <h3 class="popup__title">Edit profile</h3>
                 <button class="popup__close-button"></button>
-                <form class="popup__form">
+                <form class="popup__form" id="edit-profile-form">
                     <div class="popup__input-container">
                         <input type="text" class="popup__input" id="name-input" name="name" placeholder="Name">
                     </div>
@@ -31,27 +30,27 @@
             </div>
         </div>
         
-        <div class="popup add-popup">
-            <div class="add__popup--content">
-                <h3 class="add__popup--title">New Place</h3>
+        <div class="popup" id="add-popup">
+            <div class="popup__content">
+                <h3 class="popup__title">New Place</h3>
                 <button class="popup__close-button"></button>
-                <form class="add__popup--form">
-                    <div class="add__popup--input-container">
-                        <input type="text" class="add__popup--input" id="add__popup--name" name="name" placeholder="Title">
+                <form class="popup__form" id="add-form">
+                    <div class="popup__input-container">
+                        <input type="text" class="popup__input" id="add_title-input" name="name" placeholder="Title">
                     </div>
                     <div class="popup__input-container">
-                        <input type="text" class="add__popup--input" id="add__popup--url" name="name" placeholder="Image URL">
+                        <input type="text" class="popup__input" id="add_url-input" name="name" placeholder="Image URL">
                     </div>
-                    <button class="add__popup-submit" type="submit">Save</button>
+                    <button class="popup__submit" type="submit">Save</button>
                 </form>
             </div>
         </div>
         
-        <div class="popup picture-popup">
-            <div class="picture__popup-container">
+        <div class="popup" id="image_preview">
+            <div class="popup__content popup__content-image" id="image_preview-content">
                 <button class="popup__close-button"></button>
-                <img class="picture__popup-image" src="https://i.pinimg.com/originals/2c/ec/22/2cec22fe23d1f1bd837028a2d22a8ac5.gif" alt="">
-                <div class="picture__popup-title">name</div>
+                <img class="popup__image" src="#" alt="#">
+                <div class="popup__image-title">name</div>
             </div>
         </div>
         
