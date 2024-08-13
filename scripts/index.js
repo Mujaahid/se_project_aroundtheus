@@ -122,3 +122,70 @@ function openProfilePopup() {
 }
 
 editButton.addEventListener('click', openProfilePopup);
+
+
+// Reusable function to set error messages
+const showError = (input, errorMessage) => {
+    const errorElement = document.querySelector(`#${input.id}-error`);
+    input.classList.add("popup__input_type_error");
+    errorElement.textContent = errorMessage;
+    errorElement.classList.add("popup__input-error_active");
+  };
+  
+  const hideError = (input) => {
+    const errorElement = document.querySelector(`#${input.id}-error`);
+    input.classList.remove("popup__input_type_error");
+    errorElement.classList.remove("popup__input-error_active");
+    errorElement.textContent = "";
+  };
+  
+  const checkInputValidity = (input) => {
+    if (!input.validity.valid) {
+      showError(input, input.validationMessage);
+    } else {
+      hideError(input);
+    }
+  };
+  
+  const toggleButtonState = (formElement, buttonElement) => {
+    const isFormValid = formElement.checkValidity();
+    if (isFormValid) {
+      buttonElement.classList.remove('popup__submit_inactive');
+      buttonElement.disabled = false;
+    } else {
+      buttonElement.classList.add('popup__submit_inactive');
+      buttonElement.disabled = true;
+    }
+  };
+  
+  const setEventListeners = (formElement) => {
+    const inputs = Array.from(formElement.querySelectorAll('.popup__input'));
+    const buttonElement = formElement.querySelector('.popup__submit');
+  
+    inputs.forEach((input) => {
+      input.addEventListener('input', () => {
+        checkInputValidity(input);
+        toggleButtonState(formElement, buttonElement);
+      });
+    });
+  
+    formElement.addEventListener('reset', () => {
+      inputs.forEach((input) => {
+        hideError(input);
+        toggleButtonState(formElement, buttonElement);
+      });
+    });
+  };
+  
+  // Initialization for both forms
+  const enableValidation = () => {
+    const forms = Array.from(document.querySelectorAll('.popup__form'));
+  
+    forms.forEach((form) => {
+      setEventListeners(form);
+    });
+  };
+  
+  // Call this function to enable validation on page load
+  enableValidation();
+  

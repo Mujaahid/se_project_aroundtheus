@@ -71,6 +71,27 @@
 .popup__input-container {
     margin-bottom: 29px;
 }
+.popup__input-error {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+    display: none;
+}
+
+.popup__input-error_active {
+    display: block;
+}
+
+.popup__input_type_error {
+    border-bottom: 2px solid red;
+}
+
+.popup__submit:disabled {
+    cursor: not-allowed;
+    background: white;
+    border: solid 1px #c5c5c5;
+    color: #c5c5c5;
+}
   
 .popup__input-container:last-child {
     margin-bottom: 0;
