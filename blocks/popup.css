@@ -87,7 +87,7 @@
     border-bottom: 2px solid red;
 }
 
-.popup__submit:disabled {
+.popup__button_disabled {
     cursor: not-allowed;
     background: white;
     border: solid 1px #c5c5c5;

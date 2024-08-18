@@ -1,89 +1,77 @@
-const toggleButtonState = (formElement, buttonElement) => {
-    const inputs = Array.from(formElement.querySelectorAll('.popup__input'));
+const toggleButtonState = (formElement, buttonElement, options) => {
+    const inputs = Array.from(formElement.querySelectorAll(options.inputSelector));
     
-    // Check if any input is empty or doesn't meet validity criteria
+    // Check if any input is empty or invalid
     const hasInvalidInput = inputs.some(input => input.value.trim() === '' || !input.validity.valid);
     
     if (hasInvalidInput) {
-        buttonElement.classList.add('popup__submit_inactive');
+        buttonElement.classList.add(options.inactiveButtonClass);
         buttonElement.disabled = true;
     } else {
-        buttonElement.classList.remove('popup__submit_inactive');
+        buttonElement.classList.remove(options.inactiveButtonClass);
         buttonElement.disabled = false;
     }
 };
 
-const showError = (input, errorMessage) => {
+const showError = (input, errorMessage, options) => {
     const errorElement = document.querySelector(`#${input.id}-error`);
-    input.classList.add("popup__input_type_error");
+    input.classList.add(options.inputErrorClass);
     errorElement.textContent = errorMessage;
-    errorElement.classList.add("popup__input-error_active");
+    errorElement.classList.add(options.errorClass);
 };
 
-const hideError = (input) => {
+const hideError = (input, options) => {
     const errorElement = document.querySelector(`#${input.id}-error`);
-    input.classList.remove("popup__input_type_error");
-    errorElement.classList.remove("popup__input-error_active");
+    input.classList.remove(options.inputErrorClass);
+    errorElement.classList.remove(options.errorClass);
     errorElement.textContent = "";
 };
 
-const checkInputValidity = (input) => {
+const checkInputValidity = (input, options) => {
     if (!input.validity.valid) {
-        showError(input, input.validationMessage);
+        showError(input, input.validationMessage, options);
     } else {
-        hideError(input);
+        hideError(input, options);
     }
 };
 
-const setEventListeners = (formElement) => {
-    const inputs = Array.from(formElement.querySelectorAll('.popup__input'));
-    const buttonElement = formElement.querySelector('.popup__submit');
-    
-    // Ensure the initial state is set based on the form content
-    toggleButtonState(formElement, buttonElement);
+const setEventListeners = (formElement, options) => {
+    const inputs = Array.from(formElement.querySelectorAll(options.inputSelector));
+    const buttonElement = formElement.querySelector(options.submitButtonSelector);
+
+    // Ensure initial state is set based on the form content
+    toggleButtonState(formElement, buttonElement, options);
 
     inputs.forEach((input) => {
         input.addEventListener('input', () => {
-            checkInputValidity(input);
-            toggleButtonState(formElement, buttonElement);
+            checkInputValidity(input, options);
+            toggleButtonState(formElement, buttonElement, options);
         });
     });
 
     formElement.addEventListener('reset', () => {
         inputs.forEach((input) => {
-            hideError(input);
-            toggleButtonState(formElement, buttonElement);
+            hideError(input, options);
+            toggleButtonState(formElement, buttonElement, options);
         });
     });
 };
 
-const enableValidation = () => {
-    const forms = Array.from(document.querySelectorAll('.popup__form'));
+
+const enableValidation = (options) => {
+    const forms = Array.from(document.querySelectorAll(options.formSelector));
     
     forms.forEach((form) => {
-        setEventListeners(form);
-        // Ensure button state is correct when the modal is opened
-        const buttonElement = form.querySelector('.popup__submit');
-        toggleButtonState(form, buttonElement);
+        setEventListeners(form, options);
     });
 };
 
 // Call this function to enable validation on page load
-enableValidation();
-
-// Close modal on background click
-document.addEventListener('click', (e) => {
-    if (e.target.classList.contains('popup')) {
-        closePopup(e.target);
-    }
-});
-
-// Close modal on escape key press
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        const openPopup = document.querySelector('.popup_opened');
-        if (openPopup) {
-            closePopup(openPopup);
-        }
-    }
+enableValidation({
+    formSelector: ".popup__form",
+    inputSelector: ".popup__input",
+    submitButtonSelector: ".popup__submit",
+    inactiveButtonClass: "popup__button_disabled", 
+    inputErrorClass: "popup__input_type_error",      
+    errorClass: "popup__input-error_active",   
 });

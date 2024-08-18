@@ -122,3 +122,20 @@ function openProfilePopup() {
 }
 
 editButton.addEventListener('click', openProfilePopup);
+
+// Close modal on background click
+document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('popup')) {
+        closePopup(e.target);
+    }
+});
+
+// Close modal on escape key press
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        const openPopup = document.querySelector('.popup_opened');
+        if (openPopup) {
+            closePopup(openPopup);
+        }
+    }
+});
