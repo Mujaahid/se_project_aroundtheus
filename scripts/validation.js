@@ -8,7 +8,6 @@ const toggleButtonState = (formElement, buttonElement, options) => {
     if (hasInvalidInput) {
         buttonElement.classList.add(options.inactiveButtonClass);
         buttonElement.disabled = true;
-        console.log(`${formElement.id} - ${buttonElement.disabled ? "enabled" : "disabled"}`);
     } else {
         buttonElement.classList.remove(options.inactiveButtonClass);
         buttonElement.disabled = false;
