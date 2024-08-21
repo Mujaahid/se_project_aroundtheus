@@ -87,12 +87,6 @@
     border-bottom: 2px solid red;
 }
 
-.popup__button_disabled {
-    cursor: not-allowed;
-    background: white;
-    border: solid 1px #c5c5c5;
-    color: #c5c5c5;
-}
   
 .popup__input-container:last-child {
     margin-bottom: 0;
@@ -115,6 +109,12 @@
 }
 .popup__submit:hover {
     background-color: rgba(0, 0, 0, 0.80);
+}
+.popup__button_disabled {
+    cursor: not-allowed;
+    background: white;
+    border: solid 1px #c5c5c5;
+    color: #c5c5c5;
 }
 
 @media screen and (max-width: 600px) {

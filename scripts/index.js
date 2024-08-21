@@ -8,6 +8,8 @@ const initialCards = [
     { name: "Lago di Braies", link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg" },
 ];
 
+const popups = document.querySelectorAll('.popup'); // Selects all elements with the 'popup' class
+
 const cardTemplate = document.getElementById('card-template').content;
 const addPopup = document.getElementById('add-popup');
 const addCardButton = document.querySelector('.profile__add-button');
@@ -26,19 +28,31 @@ const picturePopup = document.getElementById('image_preview');
 const popupImage = document.querySelector('.popup__image');
 const popupTitle = document.querySelector('.popup__image-title');
 const closeButtons = document.querySelectorAll('.popup__close-button');
-
-function openPopup(popup) {
-    if (popup) {
-        popup.classList.add('popup_opened');
+// Function to handle the Escape key press
+function handleEscClose(evt) {
+    if (evt.key === 'Escape') {
+        const openedPopup = document.querySelector('.popup_opened');
+        closePopup(openedPopup);
     }
 }
 
+// Function to open a popup and add the Escape key event listener
+function openPopup(popup) {
+    if (popup) {
+        popup.classList.add('popup_opened');
+        document.addEventListener('keydown', handleEscClose); // Add listener when opening
+    }
+}
+
+// Function to close a popup and remove the Escape key event listener
 function closePopup(popup) {
     if (popup) {
         popup.classList.remove('popup_opened');
-    } 
+        document.removeEventListener('keydown', handleEscClose); // Remove listener when closing
+    }
 }
 
+// Attach event listeners to buttons for opening and closing popups
 addCardButton.addEventListener('click', () => openPopup(addPopup));
 
 closeButtons.forEach(button => {
@@ -48,6 +62,19 @@ closeButtons.forEach(button => {
     });
 });
 
+// Function to handle background clicks directly on the popup
+function handleBackgroundClick(evt) {
+    if (evt.target.classList.contains('popup')) {
+        closePopup(evt.target);
+    }
+}
+
+// Attach event listener for background click directly to each popup
+popups.forEach(popup => {
+    popup.addEventListener('click', handleBackgroundClick);
+});
+
+// Create a card element and attach event listeners
 function createCard(cardData) {
     const cardElement = cardTemplate.cloneNode(true);
     const cardImage = cardElement.querySelector('.card__image');
@@ -77,11 +104,13 @@ function createCard(cardData) {
     return cardElement;
 }
 
+// Render initial cards
 initialCards.forEach(cardData => {
     const card = createCard(cardData);
     cardsList.appendChild(card);
 });
 
+// Handle form submission for adding a new card
 submitAddCardForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const title = addCardTitleInput.value;
@@ -95,6 +124,7 @@ submitAddCardForm.addEventListener('submit', (e) => {
     }
 });
 
+// Show a larger version of the image in a popup
 function showPopupImage(title, imageUrl) {
     popupImage.src = imageUrl;
     popupImage.alt = title; 
@@ -102,6 +132,7 @@ function showPopupImage(title, imageUrl) {
     openPopup(picturePopup);
 }
 
+// Handle profile form submission
 function handleProfileFormSubmit(evt) {
     evt.preventDefault();
     profileName.textContent = nameInput.value;
@@ -111,31 +142,16 @@ function handleProfileFormSubmit(evt) {
 
 profileFormElement.addEventListener('submit', handleProfileFormSubmit);
 
+// Fill profile form with existing data
 function fillProfileForm() {
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
 }
 
+// Open profile popup with pre-filled form
 function openProfilePopup() {
     fillProfileForm();
     openPopup(profilePopup);
 }
 
 editButton.addEventListener('click', openProfilePopup);
-
-// Close modal on background click
-document.addEventListener('click', (e) => {
-    if (e.target.classList.contains('popup')) {
-        closePopup(e.target);
-    }
-});
-
-// Close modal on escape key press
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        const openPopup = document.querySelector('.popup_opened');
-        if (openPopup) {
-            closePopup(openPopup);
-        }
-    }
-});
