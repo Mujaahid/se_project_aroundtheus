@@ -134,6 +134,7 @@
   
     .popup__submit {
       max-width: 282px;
+      font-size: 15px;
     }
   
     .popup__close-button {
