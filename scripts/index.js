@@ -1,3 +1,5 @@
+import Card from '../components/Card.js';
+import FormValidator from '../components/validation.js';
 // Array of cards and titles
 const initialCards = [
     { name: "Yosemite Valley", link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg" },
