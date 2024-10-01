@@ -1,3 +1,4 @@
+
 export default class FormValidator {
     constructor(settings, formElement) {
         this._settings = settings;
@@ -10,8 +11,10 @@ export default class FormValidator {
     _checkInputValidity(inputElement) {
         if (!inputElement.validity.valid) {
             this._showError(inputElement, inputElement.validationMessage);
+            console.log("working")
         } else {
             this._hideError(inputElement);
+            console.log("else working")
         }
     }
 
