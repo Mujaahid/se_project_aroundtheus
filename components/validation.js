@@ -1,40 +1,42 @@
-
 export default class FormValidator {
     constructor(settings, formElement) {
         this._settings = settings;
         this._formElement = formElement;
         this._inputList = Array.from(this._formElement.querySelectorAll(this._settings.inputSelector));
         this._submitButton = this._formElement.querySelector(this._settings.submitButtonSelector);
+    
+        console.log('Input elements found:', this._inputList);  // Debug log
+        console.log('Submit button found:', this._submitButton);  // Debug log
     }
+    
 
-    // Private method to check input validity
     _checkInputValidity(inputElement) {
         if (!inputElement.validity.valid) {
             this._showError(inputElement, inputElement.validationMessage);
-            console.log("working")
+            console.log('Invalid input detected:', inputElement.id); 
         } else {
             this._hideError(inputElement);
-            console.log("else working")
+            console.log('Valid input:', inputElement.id);
         }
-    }
+        console.log(inputElement.validity, "this one");
 
-    // Private method to show an error message
+    }
+    
+
     _showError(inputElement, errorMessage) {
         const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
         inputElement.classList.add(this._settings.inputErrorClass);
         errorElement.textContent = errorMessage;
-        errorElement.classList.add(this._settings.errorClass);
+        errorElement.classList.add(this._settings.errorClass); 
     }
 
-    // Private method to hide an error message
     _hideError(inputElement) {
         const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
         inputElement.classList.remove(this._settings.inputErrorClass);
-        errorElement.classList.remove(this._settings.errorClass);
+        errorElement.classList.remove(this._settings.errorClass); 
         errorElement.textContent = "";
     }
 
-    // Private method to toggle submit button state based on form validity
     _toggleButtonState() {
         const isFormInvalid = this._inputList.some(inputElement => !inputElement.validity.valid);
         if (isFormInvalid) {
@@ -46,7 +48,6 @@ export default class FormValidator {
         }
     }
 
-    // Private method to set event listeners for form elements
     _setEventListeners() {
         this._inputList.forEach(inputElement => {
             inputElement.addEventListener('input', () => {
@@ -62,12 +63,10 @@ export default class FormValidator {
         });
     }
 
-    // Public method to enable validation
     enableValidation() {
         this._setEventListeners();
     }
 
-    // Public method to reset validation (e.g., when form is submitted or modal is closed)
     resetValidation() {
         this._inputList.forEach(inputElement => {
             this._hideError(inputElement);
@@ -75,3 +74,4 @@ export default class FormValidator {
         this._toggleButtonState();
     }
 }
+

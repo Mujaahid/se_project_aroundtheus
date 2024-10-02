@@ -1,5 +1,6 @@
-import Card from '../components/Card.js';
 import FormValidator from '../components/validation.js';
+import Card from '../components/Card.js';
+
 // Array of cards and titles
 const initialCards = [
     { name: "Yosemite Valley", link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg" },
@@ -9,6 +10,7 @@ const initialCards = [
     { name: "Vanoise National Park", link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg" },
     { name: "Lago di Braies", link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg" },
 ];
+
 
 const popups = document.querySelectorAll('.popup'); // Selects all elements with the 'popup' class
 
@@ -157,3 +159,31 @@ function openProfilePopup() {
 }
 
 editButton.addEventListener('click', openProfilePopup);
+
+document.addEventListener('DOMContentLoaded', () => {
+    const settings = {
+        inputSelector: '.popup__input',               // Matches input class in HTML
+        submitButtonSelector: '.popup__submit',       // Update this to match your submit button class
+        inactiveButtonClass: 'popup__button_disabled', // Add this class in your CSS if you want to disable the button
+        inputErrorClass: 'popup__input_type_error',    // For input field errors (adjust if different in CSS)
+        errorClass: 'popup__input-error'              // Matches the error message class in your HTML
+    };
+    
+
+    // const formElement = document.querySelector('.popup__form');
+
+    // Edit profile form
+    const editProfileFormElement = document.querySelector('#edit-profile-form');
+    if (editProfileFormElement) {
+        const editProfileValidator = new FormValidator(settings, editProfileFormElement);
+        editProfileValidator.enableValidation();
+    }
+
+    // Add form
+    const addFormElement = document.querySelector('#add-form');
+    if (addFormElement) {
+        const addFormValidator = new FormValidator(settings, addFormElement);
+        addFormValidator.enableValidation();
+    }
+
+})
