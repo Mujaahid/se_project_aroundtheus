@@ -11,10 +11,7 @@ const initialCards = [
     { name: "Lago di Braies", link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg" },
 ];
 
-
 const popups = document.querySelectorAll('.popup'); // Selects all elements with the 'popup' class
-
-const cardTemplate = document.getElementById('card-template').content;
 const addPopup = document.getElementById('add-popup');
 const addCardButton = document.querySelector('.profile__add-button');
 const submitAddCardForm = document.getElementById('add-form');
@@ -32,6 +29,7 @@ const picturePopup = document.getElementById('image_preview');
 const popupImage = document.querySelector('.popup__image');
 const popupTitle = document.querySelector('.popup__image-title');
 const closeButtons = document.querySelectorAll('.popup__close-button');
+
 // Function to handle the Escape key press
 function handleEscClose(evt) {
     if (evt.key === 'Escape') {
@@ -78,40 +76,16 @@ popups.forEach(popup => {
     popup.addEventListener('click', handleBackgroundClick);
 });
 
-// Create a card element and attach event listeners
-function createCard(cardData) {
-    const cardElement = cardTemplate.cloneNode(true);
-    const cardImage = cardElement.querySelector('.card__image');
-    const cardTitle = cardElement.querySelector('.card__title');
-    const likeButton = cardElement.querySelector('.card__like-button');
-    const deleteButton = cardElement.querySelector('.delete__icon');
-
-    cardImage.src = cardData.link;
-    cardImage.alt = cardData.name;
-    cardTitle.textContent = cardData.name;
-
-    cardImage.addEventListener('click', () => {
-        showPopupImage(cardData.name, cardData.link);
-    });
-
-    likeButton.addEventListener('click', () => {
-        likeButton.classList.toggle('card__like-button_active');
-    });
-
-    deleteButton.addEventListener('click', (e) => {
-        const card = e.target.closest('.card');
-        if (card) {
-            card.remove();
-        }
-    });
-
-    return cardElement;
+// Function to render a card by appending it to the list
+function renderCard(cardData) {
+    const card = new Card(cardData, '#card-template', showPopupImage); // Add the third parameter
+    const cardElement = card.getView();
+    cardsList.appendChild(cardElement);
 }
 
-// Render initial cards
+// Render initial cards using the Card class
 initialCards.forEach(cardData => {
-    const card = createCard(cardData);
-    cardsList.appendChild(card);
+    renderCard(cardData);
 });
 
 // Handle form submission for adding a new card
@@ -120,8 +94,7 @@ submitAddCardForm.addEventListener('submit', (e) => {
     const title = addCardTitleInput.value;
     const imageUrl = addCardImageInput.value;
     if (title && imageUrl) {
-        const newCard = createCard({ name: title, link: imageUrl });
-        cardsList.prepend(newCard);
+        renderCard({ name: title, link: imageUrl });
         addCardTitleInput.value = '';
         addCardImageInput.value = '';
         closePopup(addPopup);
@@ -169,9 +142,6 @@ document.addEventListener('DOMContentLoaded', () => {
         errorClass: 'popup__input-error'              // Matches the error message class in your HTML
     };
     
-
-    // const formElement = document.querySelector('.popup__form');
-
     // Edit profile form
     const editProfileFormElement = document.querySelector('#edit-profile-form');
     if (editProfileFormElement) {
@@ -185,5 +155,4 @@ document.addEventListener('DOMContentLoaded', () => {
         const addFormValidator = new FormValidator(settings, addFormElement);
         addFormValidator.enableValidation();
     }
-
-})
+});
