@@ -9,7 +9,6 @@ export default class FormValidator {
         console.log('Submit button found:', this._submitButton);  // Debug log
     }
     
-
     _checkInputValidity(inputElement) {
         if (!inputElement.validity.valid) {
             this._showError(inputElement, inputElement.validationMessage);
@@ -19,10 +18,8 @@ export default class FormValidator {
             console.log('Valid input:', inputElement.id);
         }
         console.log(inputElement.validity, "this one");
-
     }
     
-
     _showError(inputElement, errorMessage) {
         const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
         inputElement.classList.add(this._settings.inputErrorClass);
@@ -37,8 +34,9 @@ export default class FormValidator {
         errorElement.textContent = "";
     }
 
+    // Check if any input is invalid or empty
     _toggleButtonState() {
-        const isFormInvalid = this._inputList.some(inputElement => !inputElement.validity.valid);
+        const isFormInvalid = this._inputList.some(inputElement => !inputElement.validity.valid || inputElement.value.trim() === "");
         if (isFormInvalid) {
             this._submitButton.classList.add(this._settings.inactiveButtonClass);
             this._submitButton.disabled = true;
@@ -48,6 +46,7 @@ export default class FormValidator {
         }
     }
 
+    // Set up event listeners on inputs
     _setEventListeners() {
         this._inputList.forEach(inputElement => {
             inputElement.addEventListener('input', () => {
@@ -55,18 +54,25 @@ export default class FormValidator {
                 this._toggleButtonState();
             });
         });
+
+        // Ensure button is disabled after form reset
         this._formElement.addEventListener('reset', () => {
             this._inputList.forEach(inputElement => {
                 this._hideError(inputElement);
             });
-            this._toggleButtonState();
+            this._toggleButtonState();  // Disable button after reset
         });
+
+        // Also disable button by default on first load
+        this._toggleButtonState(); 
     }
 
+    // Enable form validation
     enableValidation() {
         this._setEventListeners();
     }
 
+    // Reset validation for re-use (clears errors and resets button)
     resetValidation() {
         this._inputList.forEach(inputElement => {
             this._hideError(inputElement);
@@ -74,4 +80,3 @@ export default class FormValidator {
         this._toggleButtonState();
     }
 }
-

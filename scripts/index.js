@@ -1,4 +1,4 @@
-import FormValidator from '../components/validation.js';
+import FormValidator from '../components/FormValidator.js';
 import Card from '../components/Card.js';
 
 // Array of cards and titles
@@ -76,11 +76,16 @@ popups.forEach(popup => {
     popup.addEventListener('click', handleBackgroundClick);
 });
 
+// Function to create a card
+function createCard(cardData) {
+    const card = new Card(cardData, '#card-template', showPopupImage); // Add the third parameter
+    return card.getView();
+}
+
 // Function to render a card by appending it to the list
 function renderCard(cardData) {
-    const card = new Card(cardData, '#card-template', showPopupImage); // Add the third parameter
-    const cardElement = card.getView();
-    cardsList.appendChild(cardElement);
+    const cardElement = createCard(cardData);
+    cardsList.prepend(cardElement);
 }
 
 // Render initial cards using the Card class
@@ -142,15 +147,15 @@ document.addEventListener('DOMContentLoaded', () => {
         errorClass: 'popup__input-error'              // Matches the error message class in your HTML
     };
     
-    // Edit profile form
+    // Reuse already selected forms
     const editProfileFormElement = document.querySelector('#edit-profile-form');
+    const addFormElement = document.querySelector('#add-form');
+
     if (editProfileFormElement) {
         const editProfileValidator = new FormValidator(settings, editProfileFormElement);
         editProfileValidator.enableValidation();
     }
 
-    // Add form
-    const addFormElement = document.querySelector('#add-form');
     if (addFormElement) {
         const addFormValidator = new FormValidator(settings, addFormElement);
         addFormValidator.enableValidation();
