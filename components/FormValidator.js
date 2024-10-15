@@ -57,9 +57,7 @@ export default class FormValidator {
 
         // Ensure button is disabled after form reset
         this._formElement.addEventListener('reset', () => {
-            this._inputList.forEach(inputElement => {
-                this._hideError(inputElement);
-            });
+            resetValidation()
             this._toggleButtonState();  // Disable button after reset
         });
 
