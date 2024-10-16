@@ -100,8 +100,9 @@ submitAddCardForm.addEventListener('submit', (e) => {
     const imageUrl = addCardImageInput.value;
     if (title && imageUrl) {
         renderCard({ name: title, link: imageUrl });
-        addCardTitleInput.value = '';
-        addCardImageInput.value = '';
+        // addCardTitleInput.value = '';
+        // addCardImageInput.value = '';
+        submitAddCardForm.reset()
         closePopup(addPopup);
     }
 });
@@ -148,16 +149,13 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     
     // Reuse already selected forms
-    const editProfileFormElement = document.querySelector('#edit-profile-form');
-    const addFormElement = document.querySelector('#add-form');
-
-    if (editProfileFormElement) {
-        const editProfileValidator = new FormValidator(settings, editProfileFormElement);
+    if (profileFormElement) {
+        const editProfileValidator = new FormValidator(settings, profileFormElement);
         editProfileValidator.enableValidation();
     }
 
-    if (addFormElement) {
-        const addFormValidator = new FormValidator(settings, addFormElement);
+    if (submitAddCardForm) {
+        const addFormValidator = new FormValidator(settings, submitAddCardForm);
         addFormValidator.enableValidation();
     }
 });
