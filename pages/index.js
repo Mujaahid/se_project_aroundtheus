@@ -1,6 +1,8 @@
-import FormValidator from '../components/FormValidator.js';
-import Card from '../components/Card.js';
-
+import UserInfo from './components/UserInfo.js';
+import PopupWithForm from './components/';
+import PopupWithImage from './components/PopupWithImage.js';
+import { FormValidator } from './components/FormValidator.js';
+import Card from './components/Card.js';
 // Array of cards and titles
 const initialCards = [
     { name: "Yosemite Valley", link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg" },
@@ -11,151 +13,72 @@ const initialCards = [
     { name: "Lago di Braies", link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg" },
 ];
 
-const popups = document.querySelectorAll('.popup'); // Selects all elements with the 'popup' class
-const addPopup = document.getElementById('add-popup');
-const addCardButton = document.querySelector('.profile__add-button');
-const submitAddCardForm = document.getElementById('add-form');
-const cardsList = document.getElementById('cardList');
-const addCardTitleInput = document.getElementById('add_title-input');
-const addCardImageInput = document.getElementById('add_url-input');
-const profilePopup = document.getElementById('edit-popup');
-const editButton = document.querySelector('.profile__edit-button');
-const profileFormElement = document.getElementById('edit-profile-form');
-const nameInput = document.getElementById('name-input');
-const jobInput = document.getElementById('description-input');
-const profileName = document.querySelector('.profile__title');
-const profileJob = document.querySelector('.profile__description');
-const picturePopup = document.getElementById('image_preview');
-const popupImage = document.querySelector('.popup__image');
-const popupTitle = document.querySelector('.popup__image-title');
-const closeButtons = document.querySelectorAll('.popup__close-button');
+// PopupSelectors.js
+export const popupSelectors = {
+    popups: document.querySelectorAll('.popup'),
+    addPopup: document.getElementById('add-popup'),
+    addCardButton: document.querySelector('.profile__add-button'),
+    submitAddCardForm: document.getElementById('add-form'),
+    cardsList: document.getElementById('cardList'),
+    addCardTitleInput: document.getElementById('add_title-input'),
+    addCardImageInput: document.getElementById('add_url-input'),
+    profilePopup: document.getElementById('edit-popup'),
+    editButton: document.querySelector('.profile__edit-button'),
+    profileFormElement: document.getElementById('edit-profile-form'),
+    nameInput: document.getElementById('name-input'),
+    jobInput: document.getElementById('description-input'),
+    profileName: document.querySelector('.profile__title'),
+    profileJob: document.querySelector('.profile__description'),
+    picturePopup: document.getElementById('image_preview'),
+    popupImage: document.querySelector('.popup__image'),
+    popupTitle: document.querySelector('.popup__image-title'),
+    closeButtons: document.querySelectorAll('.popup__close-button'),
+};
 
-// Function to handle the Escape key press
-function handleEscClose(evt) {
-    if (evt.key === 'Escape') {
-        const openedPopup = document.querySelector('.popup_opened');
-        closePopup(openedPopup);
-    }
-}
-
-// Function to open a popup and add the Escape key event listener
-function openPopup(popup) {
-    if (popup) {
-        popup.classList.add('popup_opened');
-        document.addEventListener('keydown', handleEscClose); // Add listener when opening
-    }
-}
-
-// Function to close a popup and remove the Escape key event listener
-function closePopup(popup) {
-    if (popup) {
-        popup.classList.remove('popup_opened');
-        document.removeEventListener('keydown', handleEscClose); // Remove listener when closing
-    }
-}
-
-// Attach event listeners to buttons for opening and closing popups
-addCardButton.addEventListener('click', () => openPopup(addPopup));
-
-closeButtons.forEach(button => {
-    button.addEventListener('click', (e) => {
-        const popup = e.target.closest('.popup');
-        closePopup(popup);
-    });
+// User Info instance
+const userInfo = new UserInfo({
+    nameSelector: '.profile__title',
+    jobSelector: '.profile__description'
 });
 
-// Function to handle background clicks directly on the popup
-function handleBackgroundClick(evt) {
-    if (evt.target.classList.contains('popup')) {
-        closePopup(evt.target);
-    }
-}
-
-// Attach event listener for background click directly to each popup
-popups.forEach(popup => {
-    popup.addEventListener('click', handleBackgroundClick);
+// Popup instances
+const profilePopup = new PopupWithForm('#edit-popup', (formData) => {
+    userInfo.setUserInfo(formData);
+    profilePopup.close();
 });
+profilePopup.setEventListeners();
 
-// Function to create a card
-function createCard(cardData) {
-    const card = new Card(cardData, '#card-template', showPopupImage); // Add the third parameter
-    return card.getView();
+const addCardPopup = new PopupWithForm('#add-popup', (formData) => {
+    const card = new Card(formData, '#card-template', handleCardClick);
+    cardsList.prepend(card.getView());
+    addCardPopup.close();
+});
+addCardPopup.setEventListeners();
+
+const imagePopup = new PopupWithImage('#image_preview');
+imagePopup.setEventListeners();
+
+// Handle card click
+function handleCardClick(cardData) {
+    imagePopup.open(cardData);
 }
 
-// Function to render a card by appending it to the list
-function renderCard(cardData) {
-    const cardElement = createCard(cardData);
-    cardsList.prepend(cardElement);
-}
-
-// Render initial cards using the Card class
+// Render initial cards
 initialCards.forEach(cardData => {
-    renderCard(cardData);
+    const card = new Card(cardData, '#card-template', handleCardClick);
+    cardsList.prepend(card.getView());
 });
 
-// Handle form submission for adding a new card
-submitAddCardForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const title = addCardTitleInput.value;
-    const imageUrl = addCardImageInput.value;
-    if (title && imageUrl) {
-        renderCard({ name: title, link: imageUrl });
-        // addCardTitleInput.value = '';
-        // addCardImageInput.value = '';
-        submitAddCardForm.reset()
-        closePopup(addPopup);
-    }
+// Event listeners
+document.querySelector('.profile__edit-button').addEventListener('click', () => {
+    const userData = userInfo.getUserInfo();
+    document.querySelector('#name-input').value = userData.name;
+    document.querySelector('#description-input').value = userData.job;
+    profilePopup.open();
 });
 
-// Show a larger version of the image in a popup
-function showPopupImage(title, imageUrl) {
-    popupImage.src = imageUrl;
-    popupImage.alt = title; 
-    popupTitle.textContent = title;
-    openPopup(picturePopup);
-}
+document.querySelector('.profile__add-button').addEventListener('click', () => addCardPopup.open());
 
-// Handle profile form submission
-function handleProfileFormSubmit(evt) {
-    evt.preventDefault();
-    profileName.textContent = nameInput.value;
-    profileJob.textContent = jobInput.value;
-    closePopup(profilePopup);
-}
-
-profileFormElement.addEventListener('submit', handleProfileFormSubmit);
-
-// Fill profile form with existing data
-function fillProfileForm() {
-    nameInput.value = profileName.textContent;
-    jobInput.value = profileJob.textContent;
-}
-
-// Open profile popup with pre-filled form
-function openProfilePopup() {
-    fillProfileForm();
-    openPopup(profilePopup);
-}
-
-editButton.addEventListener('click', openProfilePopup);
-
-document.addEventListener('DOMContentLoaded', () => {
-    const settings = {
-        inputSelector: '.popup__input',               // Matches input class in HTML
-        submitButtonSelector: '.popup__submit',       // Update this to match your submit button class
-        inactiveButtonClass: 'popup__button_disabled', // Add this class in your CSS if you want to disable the button
-        inputErrorClass: 'popup__input_type_error',    // For input field errors (adjust if different in CSS)
-        errorClass: 'popup__input-error'              // Matches the error message class in your HTML
-    };
-    
-    // Reuse already selected forms
-    if (profileFormElement) {
-        const editProfileValidator = new FormValidator(settings, profileFormElement);
-        editProfileValidator.enableValidation();
-    }
-
-    if (submitAddCardForm) {
-        const addFormValidator = new FormValidator(settings, submitAddCardForm);
-        addFormValidator.enableValidation();
-    }
-});
+// Form validation
+new FormValidator(settings, document.querySelector('#edit-profile-form')).enableValidation();
+new FormValidator(settings, document.querySelector('#add-form')).enableValidation();
