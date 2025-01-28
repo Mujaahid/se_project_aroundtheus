@@ -1,8 +1,8 @@
-import UserInfo from './components/UserInfo.js';
-import PopupWithForm from './components/';
-import PopupWithImage from './components/PopupWithImage.js';
-import { FormValidator } from './components/FormValidator.js';
-import Card from './components/Card.js';
+import UserInfo from '../components/UserInfo.js';
+import PopupWithForm from '../components/';
+import PopupWithImage from '../components/PopupWithImage.js';
+import { FormValidator } from '../components/FormValidator.js';
+import Card from '../components/Card.js';
 // Array of cards and titles
 const initialCards = [
     { name: "Yosemite Valley", link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg" },
