@@ -8,12 +8,15 @@ module.exports = {
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist"),
+    devtool: "inline-source-map",
+
   },
   mode: "development",
   devServer: {
     static: path.resolve(__dirname, "dist"),
     port: 8080,
     open: true,
+    hot: true
   },
   module: {
     rules: [
@@ -38,6 +41,7 @@ module.exports = {
     ],
   },
   plugins: [
+    
     new HtmlWebpackPlugin({
       template: "./index.html",
       favicon: "./favicon.ico",
