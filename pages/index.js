@@ -25,7 +25,7 @@ const initialCards = [
 ];
 
 // PopupSelectors.js
-const popupSelectors = {
+export const popupSelectors = {
     popups: document.querySelectorAll('.popup'),
     addPopup: document.getElementById('add-popup'),
     addCardButton: document.querySelector('.profile__add-button'),
