@@ -10,12 +10,19 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
   },
   mode: "development",
+
+  // Add devServer here
   devServer: {
-    static: path.resolve(__dirname, "dist"),
+    static: path.resolve(__dirname, "dist"), // Ensure "dist" exists
     port: 8080,
     open: true,
-    hot: true
+    hot: true,
+    historyApiFallback: true, // Allows proper handling of routes
+
+    hot: false,  // Disable HMR
+    liveReload: true,
   },
+
   module: {
     rules: [
       {
@@ -38,13 +45,16 @@ module.exports = {
       },
     ],
   },
+
   plugins: [
-    
     new HtmlWebpackPlugin({
       template: "./index.html",
       favicon: "./favicon.ico",
     }),
     new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css",
+    }),
   ],
 };

@@ -3,7 +3,7 @@ export default class Card {
         this._name = name;
         this._link = link;
         this._cardSelector = cardSelector;
-        this._handleCardClick = handleCardClick; // Callback for handling the image popup
+        this._handleCardClick = handleCardClick;
     }
 
     _setEventListeners() {

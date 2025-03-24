@@ -1,18 +1,18 @@
-import UserInfo from '../components/UserInfo.js';
-import PopupWithForm from "../components/PopupWithForm.js";
-import PopupWithImage from '../components/PopupWithImage.js';
+import "../pages/index.css";
+import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
-import Card from '../components/Card.js';
+import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import UserInfo from "../components/UserInfo.js";
 
 
-const settings = {
-    formSelector: '.popup__form',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__button',
-    inactiveButtonClass: 'popup__button_disabled',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__error_visible',
-  };
+const validationSettings = {
+    inputSelector: ".popup__input",
+    submitButtonSelector: ".popup__submit",  // Make sure this matches your button class
+    inactiveButtonClass: "popup__submit_disabled",
+    inputErrorClass: "popup__input_type_error",
+    errorClass: "popup__error_visible"
+};
 
 // Array of cards and titles
 const initialCards = [
@@ -63,8 +63,8 @@ const profilePopup = new PopupWithForm('#edit-popup', (formData) => {
 profilePopup.setEventListeners();
 
 const addCardPopup = new PopupWithForm('#add-popup', (formData) => {
-    const card = new Card(formData, '#card-template', handleCardClick);
-    cardsList.prepend(card.getView()); // Now cardsList is defined
+    const card = new Card(formData, "#card-template", handleCardClick);
+    cardsList.prepend(card.getView());
     addCardPopup.close();
 });
 addCardPopup.setEventListeners();
@@ -94,5 +94,5 @@ document.querySelector('.profile__edit-button').addEventListener('click', () => 
 document.querySelector('.profile__add-button').addEventListener('click', () => addCardPopup.open());
 
 // Form validation
-new FormValidator(settings, document.querySelector('#edit-profile-form')).enableValidation();
-new FormValidator(settings, document.querySelector('#add-form')).enableValidation();
+new FormValidator(validationSettings, document.querySelector('#edit-profile-form')).enableValidation();
+new FormValidator(validationSettings, document.querySelector('#add-form')).enableValidation();

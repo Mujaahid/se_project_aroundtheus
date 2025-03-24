@@ -5,8 +5,7 @@ export default class FormValidator {
         this._inputList = Array.from(this._formElement.querySelectorAll(this._settings.inputSelector));
         this._submitButton = this._formElement.querySelector(this._settings.submitButtonSelector);
     
-        console.log('Input elements found:', this._inputList);  // Debug log
-        console.log('Submit button found:', this._submitButton);  // Debug log
+
     }
     
     _checkInputValidity(inputElement) {
