@@ -83,6 +83,9 @@ initialCards.forEach(cardData => {
     cardsList.prepend(card.getView()); // Now cardsList is defined
 });
 
+
+
+
 // Event listeners
 document.querySelector('.profile__edit-button').addEventListener('click', () => {
     const userData = userInfo.getUserInfo();
